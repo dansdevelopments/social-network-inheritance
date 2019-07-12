@@ -1,13 +1,21 @@
+from social_network.posts import Post
 
 class User(object):
     def __init__(self, first_name, last_name, email):
-        pass
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+        self.following = []
+        self.posts = []
 
     def add_post(self, post):
-        pass
+        self.posts.append(post)
 
     def get_timeline(self):
-        pass
+        timeline = []
+        for user in self.following:
+            timeline.extend(user.posts)
+        return sorted(timeline, key=Post.get_timestamp)
 
     def follow(self, other):
-        pass
+        self.following.append(other)
